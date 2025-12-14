@@ -37,7 +37,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
     const token = await createVerifcationToken(user._id);
 
-    const verificationLink = `http://localhost:${process.env.PORT}/api/v1/auth/verify?token=${token}`;
+    const verificationLink = `${process.env.BASE_URL}/api/v1/auth/verify?token=${token}`;
 
     console.log("Verify user by visiting:", verificationLink);
 
