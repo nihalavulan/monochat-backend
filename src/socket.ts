@@ -35,21 +35,24 @@ export function setupSocket(server: http.Server) {
   });
 
   io.on("connection", (socket) => {
-
-    const userId = socket.data.userId
+    const userId = socket.data.userId;
     console.log("Socket connected:", userId);
 
     socket.join(userId);
 
-    socket.on("send_message", ({toUserId , text}) => {
-        const message = {
-            fromUserId: userId,
-            text : text,
-            createdAt: new Date().toISOString(),
-        }
+    socket.on("send_message", ({ toUserId, text }) => {
+      const message = {
+        fromUserId: userId,
+        text: text,
+        createdAt: new Date().toISOString(),
+      };
 
-        io.to(toUserId).emit("receive_message", message);
-        io.to(userId).emit("receive_message", message);
-    })
+      io.to(toUserId).emit("receive_message", message);
+      io.to(userId).emit("receive_message", message);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Socket disconnected:", userId);
+    });
   });
 }
