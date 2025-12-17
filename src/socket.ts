@@ -46,6 +46,7 @@ export function setupSocket(server: http.Server) {
         text: text,
         createdAt: new Date().toISOString(),
       };
+      
 
       io.to(toUserId).emit("receive_message", message);
       io.to(userId).emit("receive_message", message);

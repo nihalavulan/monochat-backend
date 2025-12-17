@@ -1,5 +1,6 @@
 import express from 'express';
 import authRoutes from './auth.routes'
+import userRoutes from './users.routes'
 import { authMiddleWare } from '../middlewares/auth.middleware';
 
 const router = express.Router();
@@ -10,6 +11,8 @@ router.get('/' , (req,res) => {
 });
 
 router.use('/auth' , authRoutes);
+router.use('/users', authMiddleWare , userRoutes)
+
 
 
 export default router;
