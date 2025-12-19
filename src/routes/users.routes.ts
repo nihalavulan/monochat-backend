@@ -1,5 +1,5 @@
 import express from 'express';
-import { searchWithUsername } from '../controllers/user.controller';
+import { getUserDetails, searchWithUsername } from '../controllers/user.controller';
 
 
 
@@ -11,7 +11,7 @@ router.get('/' , (req,res) => {
 });
 
 router.get('/search' ,  searchWithUsername);
-
+router.get('/:id' , getUserDetails)
 
 
 export default router
